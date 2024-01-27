@@ -284,7 +284,8 @@ def test(cfg):
         model = build_model(cfg)
          
         if not cfg.TEST.CUSTOM_LOAD:
-            cu.load_test_checkpoint(cfg, model)
+            pass
+            # cu.load_test_checkpoint(cfg, model)
 
         # custom load checkpoint here
         if cfg.TEST.CUSTOM_LOAD:

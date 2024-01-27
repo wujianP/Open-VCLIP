@@ -66,8 +66,7 @@ class BasicClipVideo(nn.Module):
         # elif cfg.MODEL.ARCH == 'vitb16':
         #     self.model, self.preprocess = clip.load("ViT-B/16", jit=False, )
         else:
-            print("error loading arch")
-            exit()
+            raise KeyError("error loading arch")
         self.model.float()    
     
     def update_state(self):
