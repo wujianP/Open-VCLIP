@@ -59,6 +59,7 @@ class BasicClipVideo(nn.Module):
     def _construct_network(self, cfg):
         if cfg.MODEL.ARCH == 'vitb32':
             import open_clip
+            print(f'load model from checkpoint: {cfg.TEST.CUSTOM_LOAD_FILE}')
             self.model, _, self.preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained=cfg.TEST.CUSTOM_LOAD_FILE)
             self.tokenizer = open_clip.get_tokenizer('ViT-B-32')
         #     self.model, self.preprocess = clip.load("ViT-B/32", jit=False, )
