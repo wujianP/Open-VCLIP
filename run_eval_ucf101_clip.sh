@@ -1,7 +1,7 @@
 ROOT=/discobox/wjpeng/code/2024/Open-VCLIP
 OUT_DIR=/discobox/wjpeng/ckp/betterCLIP/rebuttal/action_recognition/ucf101_clip_vitb32
 
-LOAD_CKPT_FILE=None
+LOAD_CKPT_FILE=openai
 PATCHING_RATIO=1.0
 
 conda activate /DDN_ROOT/ytcheng/env/ivnet

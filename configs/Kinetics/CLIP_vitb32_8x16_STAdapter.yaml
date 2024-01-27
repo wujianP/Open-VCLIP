@@ -46,7 +46,6 @@ SOLVER:
 MODEL:
   NUM_CLASSES: 400
   ARCH: vitb32
-  PRETRAINED: openai
   MODEL_NAME: BasicClipVideo
   LOSS_FUNC: cross_entropy
   DROPOUT_RATE: 0.5
