@@ -58,9 +58,12 @@ class BasicClipVideo(nn.Module):
 
     def _construct_network(self, cfg):
         if cfg.MODEL.ARCH == 'vitb32':
-            self.model, self.preprocess = clip.load("ViT-B/32", jit=False, )
-        elif cfg.MODEL.ARCH == 'vitb16':
-            self.model, self.preprocess = clip.load("ViT-B/16", jit=False, )
+            import open_clip
+            self.model, _, self.preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained=cfg.MODEL.PRETRAINED)
+            self.tokenizer = open_clip.get_tokenizer('ViT-B-32')
+        #     self.model, self.preprocess = clip.load("ViT-B/32", jit=False, )
+        # elif cfg.MODEL.ARCH == 'vitb16':
+        #     self.model, self.preprocess = clip.load("ViT-B/16", jit=False, )
         else:
             print("error loading arch")
             exit()
@@ -230,7 +233,8 @@ class BasicClipVideo(nn.Module):
         cls_num = len(id2cls)
         # construct the source of dynamic classifier
         for idx, txt in enumerate(text_aug):
-            text_dict[idx] = torch.cat([clip.tokenize(txt.format(id2cls[id])) for id in range(cls_num)]) 
+            # text_dict[idx] = torch.cat([clip.tokenize(txt.format(id2cls[id])) for id in range(cls_num)])
+            text_dict[idx] = torch.cat([self.tokenizer(txt.format(id2cls[id])) for id in range(cls_num)])
         return text_dict
         
     def achieve_csf_matrix(self, text_dict, model):
@@ -250,8 +254,6 @@ class BasicClipVideo(nn.Module):
  
 
 if __name__ == '__main__':
-    from IPython import embed
-    embed()
     model, preprocess = clip.load("/share/home/jia/.cache/clip/ViT-B-32.pt", jit=False, )
     
     # model: text and vision
