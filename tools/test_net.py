@@ -275,8 +275,6 @@ def test(cfg):
 
     test_meters = []
     for num_view in cfg.TEST.NUM_TEMPORAL_CLIPS:
-        from IPython import embed
-        embed(header='in test loop')
         cfg.TEST.NUM_ENSEMBLE_VIEWS = num_view
 
         # Print config.
