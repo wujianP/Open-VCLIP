@@ -4,7 +4,7 @@ OUT_DIR=/discobox/wjpeng/ckp/betterCLIP/rebuttal/action_recognition/ucf101_ourcl
 LOAD_CKPT_FILE='/DDN_ROOT/wjpeng/ckp/betterCLIP/v2/vitb32-openai_ep10-step100_lr1e-6-warm800_common-laion400m-bs256_blip-y_llama-n_extra-wt0.2-mer-bs8-hn2_sep-com-extra/checkpoints/epoch_10.pt'
 PATCHING_RATIO=1.0
 
-conda activate /DDN_ROOT/ytcheng/env/ivnet
+conda activate /discobox/wjpeng/env/openvclip/
 cd $ROOT
 python -W ignore -u tools/run_net.py \
     --cfg configs/Kinetics/CLIP_vitb32_8x16_STAdapter.yaml \
@@ -25,6 +25,5 @@ python -W ignore -u tools/run_net.py \
     TEST.NUM_SPATIAL_CROPS 1 \
     TEST.PATCHING_MODEL False \
     TEST.PATCHING_RATIO $PATCHING_RATIO
-
 
 

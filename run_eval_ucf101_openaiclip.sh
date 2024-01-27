@@ -4,7 +4,7 @@ OUT_DIR=/discobox/wjpeng/ckp/betterCLIP/rebuttal/action_recognition/ucf101_clip_
 LOAD_CKPT_FILE=openai
 PATCHING_RATIO=1.0
 
-conda activate /DDN_ROOT/ytcheng/env/ivnet
+conda activate /discobox/wjpeng/env/openvclip/
 cd $ROOT
 python -W ignore -u tools/run_net.py \
     --cfg configs/Kinetics/CLIP_vitb32_8x16_STAdapter.yaml \
