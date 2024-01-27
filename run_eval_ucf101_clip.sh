@@ -1,6 +1,5 @@
 ROOT=/discobox/wjpeng/code/2024/Open-VCLIP
-CKPT=/DDN_ROOT/ytcheng/code/patching_checkpoint
-OUT_DIR=$CKPT/testing
+OUT_DIR=/discobox/wjpeng/ckp/betterCLIP/rebuttal/action_recognition/ucf101_clip_vitb32
 
 LOAD_CKPT_FILE=None
 PATCHING_RATIO=1.0
@@ -8,7 +7,7 @@ PATCHING_RATIO=1.0
 conda activate /DDN_ROOT/ytcheng/env/ivnet
 cd $ROOT
 python -W ignore -u tools/run_net.py \
-    --cfg configs/Kinetics/CLIP_vitb16_8x16_STAdapter.yaml \
+    --cfg configs/Kinetics/CLIP_vitb32_8x16_STAdapter.yaml \
     --opts DATA.PATH_TO_DATA_DIR $ROOT/zs_label_db/ucf101_full \
     DATA.PATH_PREFIX /dev/shm/ucf/UCF-101 \
     DATA.PATH_LABEL_SEPARATOR , \
