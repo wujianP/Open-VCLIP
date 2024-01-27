@@ -1,23 +1,24 @@
 ROOT=/discobox/wjpeng/code/2024/Open-VCLIP
-OUT_DIR=/discobox/wjpeng/ckp/betterCLIP/rebuttal/action_recognition/ucf101_clip_vitb32
+OUT_DIR=/discobox/wjpeng/ckp/betterCLIP/rebuttal/action_recognition/k600_ourclip_vitb32
 
-LOAD_CKPT_FILE=openai
+LOAD_CKPT_FILE='/DDN_ROOT/wjpeng/ckp/betterCLIP/v2/vitb32-openai_ep10-step100_lr1e-6-warm800_common-laion400m-bs256_blip-y_llama-n_extra-wt0.2-mer-bs8-hn2_sep-com-extra/checkpoints/epoch_10.pt'
 PATCHING_RATIO=1.0
 
+K600_split=k600_split1
 conda activate /discobox/wjpeng/env/openvclip/
 cd $ROOT
 python -W ignore -u tools/run_net.py \
     --cfg configs/Kinetics/CLIP_vitb32_8x16_STAdapter.yaml \
-    --opts DATA.PATH_TO_DATA_DIR $ROOT/zs_label_db/ucf101_full \
-    DATA.PATH_PREFIX /dev/shm/ucf/UCF-101 \
+    --opts DATA.PATH_TO_DATA_DIR $ROOT/zs_label_db/$K600_split \
+    DATA.PATH_PREFIX /dev/shm/k600 \
     DATA.PATH_LABEL_SEPARATOR , \
-    DATA.INDEX_LABEL_MAPPING_FILE $ROOT/zs_label_db/ucf101-index2cls.json \
+    DATA.INDEX_LABEL_MAPPING_FILE $ROOT/zs_label_db/$K600_split/k600-openset-index2cls.json \
     TRAIN.ENABLE False \
     OUTPUT_DIR $OUT_DIR \
     TEST.BATCH_SIZE 480 \
     NUM_GPUS 8 \
     DATA.DECODING_BACKEND "pyav" \
-    MODEL.NUM_CLASSES 101 \
+    MODEL.NUM_CLASSES 160 \
     TEST.CUSTOM_LOAD False \
     TEST.CUSTOM_LOAD_FILE $LOAD_CKPT_FILE \
     TEST.SAVE_RESULTS_PATH temp.pyth \
