@@ -257,8 +257,7 @@ def test(cfg):
         cfg (CfgNode): configs. Details can be found in
             slowfast/config/defaults.py
     """
-    from IPython import embed
-    embed(header='in test')
+
     # Set up environment.
     try:
         du.init_distributed_training(cfg)
@@ -276,7 +275,8 @@ def test(cfg):
 
     test_meters = []
     for num_view in cfg.TEST.NUM_TEMPORAL_CLIPS:
-
+        from IPython import embed
+        embed(header='in test loop')
         cfg.TEST.NUM_ENSEMBLE_VIEWS = num_view
 
         # Print config.

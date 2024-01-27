@@ -7,6 +7,7 @@ import os
 import numpy as np
 import json
 
+
 @MODEL_REGISTRY.register()
 class BasicClipVideo(nn.Module):
     """
