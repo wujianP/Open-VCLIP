@@ -58,6 +58,8 @@ class BasicClipVideo(nn.Module):
         }
 
     def _construct_network(self, cfg):
+        from IPython import embed
+        embed(header='in model create')
         import open_clip
         print(f'load model from checkpoint: {cfg.TEST.CUSTOM_LOAD_FILE}')
         self.model, _, self.preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained=cfg.TEST.CUSTOM_LOAD_FILE)
