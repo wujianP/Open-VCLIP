@@ -57,11 +57,13 @@ class BasicClipVideo(nn.Module):
         }
 
     def _construct_network(self, cfg):
+        from IPython import embed
+        embed(header='in model')
         import open_clip
         print(f'load model from checkpoint: {cfg.TEST.CUSTOM_LOAD_FILE}')
         self.model, _, self.preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained=cfg.TEST.CUSTOM_LOAD_FILE)
         self.tokenizer = open_clip.get_tokenizer('ViT-B-32')
-        self.model.float()    
+        self.model.float()
     
     def update_state(self):
         self.dynamic_classifier = self.achieve_csf_matrix(self.text_dict, self.model)
