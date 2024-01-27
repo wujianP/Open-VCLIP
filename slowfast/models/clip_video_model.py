@@ -250,6 +250,8 @@ class BasicClipVideo(nn.Module):
  
 
 if __name__ == '__main__':
+    from IPython import embed
+    embed()
     model, preprocess = clip.load("/share/home/jia/.cache/clip/ViT-B-32.pt", jit=False, )
     
     # model: text and vision
