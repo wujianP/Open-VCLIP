@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from . import clip
+# from . import clip
 
 from .build import MODEL_REGISTRY
 import os
@@ -57,16 +57,10 @@ class BasicClipVideo(nn.Module):
         }
 
     def _construct_network(self, cfg):
-        if cfg.MODEL.ARCH == 'vitb32':
-            import open_clip
-            print(f'load model from checkpoint: {cfg.TEST.CUSTOM_LOAD_FILE}')
-            self.model, _, self.preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained=cfg.TEST.CUSTOM_LOAD_FILE)
-            self.tokenizer = open_clip.get_tokenizer('ViT-B-32')
-        #     self.model, self.preprocess = clip.load("ViT-B/32", jit=False, )
-        # elif cfg.MODEL.ARCH == 'vitb16':
-        #     self.model, self.preprocess = clip.load("ViT-B/16", jit=False, )
-        else:
-            raise KeyError("error loading arch")
+        import open_clip
+        print(f'load model from checkpoint: {cfg.TEST.CUSTOM_LOAD_FILE}')
+        self.model, _, self.preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained=cfg.TEST.CUSTOM_LOAD_FILE)
+        self.tokenizer = open_clip.get_tokenizer('ViT-B-32')
         self.model.float()    
     
     def update_state(self):
@@ -254,7 +248,8 @@ class BasicClipVideo(nn.Module):
  
 
 if __name__ == '__main__':
-    model, preprocess = clip.load("/share/home/jia/.cache/clip/ViT-B-32.pt", jit=False, )
+    pass
+    # model, preprocess = clip.load("/share/home/jia/.cache/clip/ViT-B-32.pt", jit=False, )
     
     # model: text and vision
 
